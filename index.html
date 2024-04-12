@@ -7,46 +7,90 @@
 <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
     }
     .container {
         max-width: 800px;
-        margin: 0 auto;
+        margin: 50px auto;
         padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2, h3 {
+        color: #333;
     }
     textarea {
         width: 100%;
         height: 150px;
         margin-bottom: 10px;
         padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
     }
     button {
         padding: 10px 20px;
         background-color: #007bff;
         color: #fff;
         border: none;
+        border-radius: 4px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
     }
-    #output {
+    button:hover {
+        background-color: #0056b3;
+    }
+    .box {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+    .output {
         margin-top: 20px;
         padding: 10px;
         border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        word-wrap: break-word;
     }
 </style>
 </head>
 <body>
 <div class="container">
-    <h2>Text Summarization</h2>
-    <textarea id="inputText" placeholder="Paste your text here..."></textarea>
-    <button onclick="summarize()">Summarize</button>
-    <div id="output"></div>
+    <h1 style="text-align: center;">Text Summarization</h1>
+    <div class="box">
+        <h2>Abstractive Summarization</h2>
+        <textarea id="abstractiveInput" placeholder="Paste your text here for abstractive summarization..."></textarea>
+        <button onclick="summarize('abstractive')">Summarize</button>
+        <div id="abstractiveOutput" class="output"></div>
+    </div>
+    <div class="box">
+        <h2>Extractive Summarization</h2>
+        <textarea id="extractiveInput" placeholder="Paste your text here for extractive summarization..."></textarea>
+        <button onclick="summarize('extractive')">Summarize</button>
+        <div id="extractiveOutput" class="output"></div>
+    </div>
 </div>
 
 <script>
-    function summarize() {
-        var inputText = document.getElementById("inputText").value;
+    function summarize(type) {
+        var inputText = '';
+        var outputDiv = '';
+        if (type === 'abstractive') {
+            inputText = document.getElementById("abstractiveInput").value;
+            outputDiv = document.getElementById("abstractiveOutput");
+        } else if (type === 'extractive') {
+            inputText = document.getElementById("extractiveInput").value;
+            outputDiv = document.getElementById("extractiveOutput");
+        }
         // Here, you would send a request to your backend to perform text summarization
         // For this example, let's just output the input text
-        document.getElementById("output").innerText = inputText;
+        outputDiv.innerText = inputText;
     }
 </script>
 </body>
