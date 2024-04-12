@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Summarization</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    textarea {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+    #output {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Text Summarization</h2>
+    <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+    <button onclick="summarize()">Summarize</button>
+    <div id="output"></div>
+</div>
+
+<script>
+    function summarize() {
+        var inputText = document.getElementById("inputText").value;
+        // Here, you would send a request to your backend to perform text summarization
+        // For this example, let's just output the input text
+        document.getElementById("output").innerText = inputText;
+    }
+</script>
+</body>
+</html>
