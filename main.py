@@ -1,6 +1,5 @@
 from flask_ngrok import run_with_ngrok
 from flask import Flask, render_template, request
-import ngrok
 from transformers import pipeline
 summarizer = pipeline('summarization')
 
@@ -10,7 +9,6 @@ pipe = pipeline('summarization')
 
 # Start flask app and set to ngrok
 app = Flask(__name__)
-ngrok.set_auth_token("cr_2fCGozPSrQrHpyTyaIHQk9v44MC")
 run_with_ngrok(app)
 
 
