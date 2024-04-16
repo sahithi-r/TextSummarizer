@@ -90,8 +90,16 @@
         }
         // Here, you would send a request to your backend to perform text summarization
         // For this example, let's just output the input text
-        outputDiv.innerText = inputText;
-    }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/submit-text", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Update the outputDiv with the response from Flask
+                outputDiv.innerText = xhr.responseText;
+            }
+        };
+        xhr.send("abstractiveInput=" + encodeURIComponent(inputText));    }
 </script>
 </body>
 </html>
