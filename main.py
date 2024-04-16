@@ -10,6 +10,7 @@ pipe = pipeline('summarization')
 
 # Start flask app and set to ngrok
 app = Flask(__name__)
+ngrok.set_auth_token("cr_2fCGozPSrQrHpyTyaIHQk9v44MC")
 run_with_ngrok(app)
 
 
