@@ -33,6 +33,5 @@ def generate_image():
 
 
 if __name__ == '__main__':
-    conf.get_default().auth_token = getpass.getpass()
     app.run()
 
