@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from pyngrok import ngrok
 from transformers import pipeline
 
+ngrok.update()
 summarizer = pipeline('summarization')
 
 # Load model
