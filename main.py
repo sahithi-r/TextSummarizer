@@ -6,7 +6,7 @@ summarizer = pipeline('summarization')
 
 # Load model
 pipe = pipeline('summarization')
-pipe.to("cuda")
+#pipe.to("cuda")
 
 # Start flask app and set to ngrok
 app = Flask(__name__)
