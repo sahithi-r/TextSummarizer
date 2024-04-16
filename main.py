@@ -1,5 +1,7 @@
 from flask_ngrok import run_with_ngrok
 from flask import Flask, render_template, request
+import getpass
+from pyngrok import ngrok, conf
 from transformers import pipeline
 summarizer = pipeline('summarization')
 
@@ -31,5 +33,6 @@ def generate_image():
 
 
 if __name__ == '__main__':
+    conf.get_default().auth_token = getpass.getpass()
     app.run()
 
