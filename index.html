@@ -58,48 +58,96 @@
         background-color: #fff;
         word-wrap: break-word;
     }
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 20%; /* Could be more or less, depending on screen size */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        text-align: center;
+    }
+
+    /* Spinner CSS */
+    .loader {
+        border: 4px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 </style>
 </head>
 <body>
 <div class="container">
     <h1 style="text-align: center;">Text Summarization</h1>
     <div class="box">
-        <h2>Abstractive Summarization</h2>
-        <textarea id="abstractiveInput" placeholder="Paste your text here for abstractive summarization..."></textarea>
-        <button onclick="summarize('abstractive')">Summarize</button>
-        <div id="abstractiveOutput" class="output"></div>
+        <h2>Summarization</h2>
+        <textarea id="summarizationInput" placeholder="Paste your text here for abstractive summarization..."></textarea>
+        <button onclick="summarize('abstractive')">Click for Abstractive Summarization</button>
+        <button onclick="summarize('extractive')">Click for Extractive Summarization</button>
+        <div id="summarizationOutput" class="output"></div>
     </div>
-    <div class="box">
-        <h2>Extractive Summarization</h2>
-        <textarea id="extractiveInput" placeholder="Paste your text here for extractive summarization..."></textarea>
-        <button onclick="summarize('extractive')">Summarize</button>
-        <div id="extractiveOutput" class="output"></div>
-    </div>
+</div>
+
+<!-- Modal HTML -->
+<div id="loadingModal" class="modal">
+  <div class="modal-content">
+    <div class="loader"></div>
+    <p>Loading...</p>
+  </div>
 </div>
 
 <script>
     function summarize(type) {
         var inputText = '';
         var outputDiv = '';
-        if (type === 'abstractive') {
-            inputText = document.getElementById("abstractiveInput").value;
-            outputDiv = document.getElementById("abstractiveOutput");
-        } else if (type === 'extractive') {
-            inputText = document.getElementById("extractiveInput").value;
-            outputDiv = document.getElementById("extractiveOutput");
-        }
-        // Here, you would send a request to your backend to perform text summarization
-        // For this example, let's just output the input text
+        inputText = document.getElementById("summarizationInput").value;
+        outputDiv = document.getElementById("summarizationOutput");
+        
+        // Show loading modal
+        var modal = document.getElementById("loadingModal");
+        modal.style.display = "block";
+
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/submit-text", true);
+
+        if (type === 'abstractive') {
+            xhr.open("POST", "/submit-text-abs", true);
+        } else if (type === 'extractive') {
+            xhr.open("POST", "/submit-text-ext", true);
+        }
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 // Update the outputDiv with the response from Flask
                 outputDiv.innerText = xhr.responseText;
+                // Hide loading modal
+                modal.style.display = "none";
             }
         };
-        xhr.send("abstractiveInput=" + encodeURIComponent(inputText));    }
+        xhr.send("summarizationInput=" + encodeURIComponent(inputText));
+    }
 </script>
 </body>
 </html>
