@@ -10,3 +10,6 @@ pyngrok
 numpy 
 datasets 
 transformers[torch]
+rouge
+evaluate
+rouge_score
