@@ -2,10 +2,8 @@ tensorflow
 scipy
 ftfy
 accelerate
-pyngrok==4.1.1
 flask_ngrok
 flask 
-flask-ngrok
 pyngrok 
 numpy 
 datasets 
