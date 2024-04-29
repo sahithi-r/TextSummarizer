@@ -1,9 +1,5 @@
-tensorflow
-scipy
-ftfy
-accelerate
-flask_ngrok
 flask 
+flask-ngrok 
 pyngrok 
 numpy 
 datasets 
